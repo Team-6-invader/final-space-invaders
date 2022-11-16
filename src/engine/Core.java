@@ -242,7 +242,7 @@ public final class Core {
 			case 2:
 
 				// Game & score
-
+				long start = System.currentTimeMillis();
 				Scanner sc = new Scanner(System.in);
 				LOGGER.info("Select your difficulty 0 is practice, 1 is easy, 2 is normal, 3 is hard");
 				diff = sc.nextInt();
@@ -324,6 +324,9 @@ public final class Core {
 					returnCode = frame.setScreen(currentScreen);
 					LOGGER.info("Closing score screen.");
 				}
+				long finish = System.currentTimeMillis();
+				long timeElapsed = finish - start;
+				System.out.println("Play time" + timeElapsed);
 				break;
 			case 3:
 				// High scores.
