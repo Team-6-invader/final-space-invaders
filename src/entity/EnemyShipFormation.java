@@ -322,6 +322,8 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				for (EnemyShip enemyShip : column)
 					 enemyShip.changeColor_G(enemyShip.getEnemyLives());
 			}
+			//마지막 적 색상 변화
+			if(isLast()) changeLastEnemy();
 		}
 	}
 
@@ -628,5 +630,11 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	 */
 	public final boolean isLast() {
 		return this.shipCount == 1;
+	}
+	private void changeLastEnemy(){
+		for (List<EnemyShip> column : this.enemyShips){
+			for(EnemyShip enemyShip : column)
+				enemyShip.changeColor_Last();
+		}
 	}
 }
