@@ -387,7 +387,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			float ShootPattern = (float)(Math.round(Math.random()*10)/10.0);
 			if (isLast()) { // The last enemy can get the all ShootPattern.
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED,0));
+						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED  ,0));
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()
 						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2,0));
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()

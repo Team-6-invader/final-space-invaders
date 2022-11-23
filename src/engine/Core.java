@@ -58,6 +58,8 @@ public final class Core {
 	 */
 	private static final int NUM_LEVELS = 5;
 
+	private static long TimeElapsed = 0;
+
 	/**
 	 * Difficulty settings for level 1.
 	 */
@@ -325,8 +327,9 @@ public final class Core {
 					LOGGER.info("Closing score screen.");
 				}
 				long finish = System.currentTimeMillis();
-				long timeElapsed = finish - start;
-				System.out.println("Play time" + timeElapsed);
+				setTimeElapsed(start, finish);
+				System.out.println("Play time: " + getMin() + " Min " + getSec() + " Sec ");
+
 				break;
 			case 3:
 				// High scores.
@@ -477,4 +480,19 @@ public final class Core {
 	public static int getDiff(){
 		return diff;
 	}
+
+	public static int getMin() {
+		int Min = (int)(TimeElapsed/1000)/60;
+		return Min;
+	}
+
+	public static  int getSec() {
+		int Sec = (int)(TimeElapsed/1000)%60;
+		return Sec;
+	}
+
+	public static void setTimeElapsed(long start, long finish) {
+		TimeElapsed = finish - start;
+	}
+
 }
