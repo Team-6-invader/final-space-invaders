@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import engine.DrawManager.SpriteType;
 import screen.GameScreen;
+import engine.DrawManager;
 
 /**
  * Implements a generic game entity.
@@ -133,12 +134,8 @@ public class Entity {
 	Color[] bg_colors = {Color.LIGHT_GRAY, Color.GRAY, Color.DARK_GRAY};
 
 	public final void changeColor() {
-		if(GameScreen.lives > 0 && GameScreen.lives <= 3){
-			setColor(bg_colors[3 - GameScreen.lives]);
-		}
-		else{
-			setColor(Color.BLACK);
-		}
+		Color Bg_color = DrawManager.bg_color;
+		setColor(Bg_color);
 	}
 
 	public final void changeColor_G(int enemyLives) {
