@@ -441,7 +441,7 @@ public class GameScreen extends Screen {
 
 
 					if(enemyShipFormation.isFirstLine(enemyShip)) {//맨 윗줄
-						if (EnemyShipFormation.shipCount <= gameSettings.getFormationWidth()) {
+						if (EnemyShipFormation.shipCount <= gameSettings.getFormationWidth()) {//파괴 시작
 
 							if (!enemyShip.isDestroyed()
 									&& checkCollision(bullet, enemyShip)) {
@@ -466,9 +466,15 @@ public class GameScreen extends Screen {
 								}
 							}
 						}
+						else {//파괴 안될 때
 
+							if (!enemyShip.isDestroyed()
+									&& checkCollision(bullet, enemyShip)) {
+								recyclable.add(bullet);
+							}
+						}
 					}
-				    else{
+				    else{//첫줄 아닌 애들 다 파괴
 						if (!enemyShip.isDestroyed()
 								&& checkCollision(bullet, enemyShip)) {
 							enemyLives = enemyShip.getEnemyLives();
