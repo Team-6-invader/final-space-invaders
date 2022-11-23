@@ -3,6 +3,7 @@ package entity;
 import java.awt.Color;
 
 import engine.DrawManager.SpriteType;
+import screen.GameScreen;
 
 /**
  * Implements a generic game entity.
@@ -129,12 +130,19 @@ public class Entity {
 		return this.height;
 	}
 
+	Color[] bg_colors = {Color.LIGHT_GRAY, Color.GRAY, Color.DARK_GRAY};
+
 	public final void changeColor() {
-		if (this.color == Color.WHITE) setColor(Color.BLACK);
+		if(GameScreen.lives > 0 && GameScreen.lives <= 3){
+			setColor(bg_colors[3 - GameScreen.lives]);
+		}
+		else{
+			setColor(Color.BLACK);
+		}
 	}
 
 	public final void changeColor_G(int enemyLives) {
-		if (this.color == Color.WHITE && enemyLives == 2) setColor(Color.GRAY);
+		if (this.color == Color.WHITE && enemyLives == 2) setColor(Color.orange);
 	}
 	public final void changeColor_Last(){
 		setColor(Color.CYAN);
