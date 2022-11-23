@@ -317,13 +317,13 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				if (enemyShips.get(randomPlace_r).get(randomPlace_c) != null)
 					enemyShips.get(randomPlace_r).get(randomPlace_c).changeColor();
 			}
-			//목숨 여러개인 적 색상 변화
-			for (List<EnemyShip> column : this.enemyShips) {
-				for (EnemyShip enemyShip : column)
-					 enemyShip.changeColor_G(enemyShip.getEnemyLives());
-			}
 			//마지막 적 색상 변화
 			if(isLast()) changeLastEnemy();
+		}
+		//목숨 여러개인 적 색상 변화
+		for (List<EnemyShip> column : this.enemyShips) {
+			for (EnemyShip enemyShip : column)
+				enemyShip.changeColor_G(enemyShip.getEnemyLives());
 		}
 	}
 

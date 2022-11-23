@@ -139,7 +139,8 @@ public class Entity {
 	}
 
 	public final void changeColor_G(int enemyLives) {
-		if (this.color == Color.WHITE && enemyLives == 2) setColor(Color.orange);
+		if (enemyLives == 2) setColor(Color.orange);
+		else setColor(Color.white);
 	}
 	public final void changeColor_Last(){
 		setColor(Color.CYAN);
