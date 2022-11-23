@@ -310,7 +310,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				for (EnemyShip enemyShip : column)
 					enemyShip.setColor(Color.white);
 			}
-
+			//적 개체 검흰 변화 => 배경색과 동일하게 색 변화
 			int randomPlace_r = (int) (Math.random() * enemyShips.size() - 1);
 			int randomPlace_c = (int) (Math.random() * enemyShips.get(randomPlace_r).size() - 1);
 			if(this.shipCount>nShipsWide) {

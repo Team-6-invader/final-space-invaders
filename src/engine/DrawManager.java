@@ -65,6 +65,8 @@ public final class DrawManager {
 	/** Big sized font properties. */
 	private static FontMetrics fontBigMetrics;
 
+	public static Color bg_color;
+
 	private static Font fontSmall;
 
 	/** Item icon and Image observer */
@@ -225,9 +227,11 @@ public final class DrawManager {
 
 		if(GameScreen.lives > 0 && GameScreen.lives <= 3){
 			backBufferGraphics.setColor(bg_colors[3 - GameScreen.lives]);
+			bg_color = bg_colors[3 - GameScreen.lives];
 		}
 		else{
 			backBufferGraphics.setColor(Color.BLACK);
+			bg_color = Color.BLACK;
 		}
 
 		backBufferGraphics
