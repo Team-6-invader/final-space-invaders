@@ -438,29 +438,64 @@ public class GameScreen extends Screen {
 
 			} else {
 				for (EnemyShip enemyShip : this.enemyShipFormation)
-					if (!enemyShip.isDestroyed()
-							&& checkCollision(bullet, enemyShip)) {
-						enemyLives = enemyShip.getEnemyLives();
-						if (enemyLives == 1) {
-							this.score += enemyShip.getPointValue();
-							this.shipsDestroyed++;
-							Random random = new Random();
-							int per = random.nextInt(3);
-							if (per == 0) {
-								items.add(ItemPool.getItem(enemyShip.getPositionX() + enemyShip.getWidth() / 2,
-										enemyShip.getPositionY(), ITEM_SPEED));
+
+
+					if(enemyShipFormation.isFirstLine(enemyShip)) {//맨 윗줄
+						if (EnemyShipFormation.shipCount <= gameSettings.getFormationWidth()) {
+
+							if (!enemyShip.isDestroyed()
+									&& checkCollision(bullet, enemyShip)) {
+								enemyLives = enemyShip.getEnemyLives();
+								if (enemyLives == 1) {
+									this.score += enemyShip.getPointValue();
+									this.shipsDestroyed++;
+									Random random = new Random();
+									int per = random.nextInt(3);
+									if (per == 0) {
+										items.add(ItemPool.getItem(enemyShip.getPositionX() + enemyShip.getWidth() / 2,
+												enemyShip.getPositionY(), ITEM_SPEED));
+									}
+									this.enemyShipFormation.destroy(enemyShip);
+									this.coin += enemyShip.getPointValue() / 10;
+									Coin.balance += enemyShip.getPointValue() / 10;
+									recyclable.add(bullet);
+								} else {
+									enemyLives--;
+									enemyShip.setenemyLives(enemyLives);
+									recyclable.add(bullet);
+								}
 							}
-							this.enemyShipFormation.destroy(enemyShip);
-							this.coin += enemyShip.getPointValue() / 10;
-							Coin.balance += enemyShip.getPointValue() / 10;
-							recyclable.add(bullet);
 						}
-						else {
-							enemyLives--;
-							enemyShip.setenemyLives(enemyLives);
-							recyclable.add(bullet);
+
+					}
+				    else{
+						if (!enemyShip.isDestroyed()
+								&& checkCollision(bullet, enemyShip)) {
+							enemyLives = enemyShip.getEnemyLives();
+							if (enemyLives == 1) {
+								this.score += enemyShip.getPointValue();
+								this.shipsDestroyed++;
+								Random random = new Random();
+								int per = random.nextInt(3);
+								if (per == 0) {
+									items.add(ItemPool.getItem(enemyShip.getPositionX() + enemyShip.getWidth() / 2,
+											enemyShip.getPositionY(), ITEM_SPEED));
+								}
+								this.enemyShipFormation.destroy(enemyShip);
+								this.coin += enemyShip.getPointValue() / 10;
+								Coin.balance += enemyShip.getPointValue() / 10;
+								recyclable.add(bullet);
+							}
+							else {
+								enemyLives--;
+								enemyShip.setenemyLives(enemyLives);
+								recyclable.add(bullet);
+							}
 						}
 					}
+
+
+
 				if (this.enemyShipSpecial != null
 						&& !this.enemyShipSpecial.isDestroyed()
 						&& checkCollision(bullet, this.enemyShipSpecial)) {
