@@ -58,6 +58,8 @@ public final class Core {
 	 */
 	private static final int NUM_LEVELS = 5;
 
+	private static long TimeElapsed = 0;
+
 	/**
 	 * Difficulty settings for level 1.
 	 */
@@ -242,7 +244,7 @@ public final class Core {
 			case 2:
 
 				// Game & score
-
+				long start = System.currentTimeMillis();
 				Scanner sc = new Scanner(System.in);
 				LOGGER.info("Select your difficulty 0 is practice, 1 is easy, 2 is normal, 3 is hard");
 				diff = sc.nextInt();
@@ -309,10 +311,14 @@ public final class Core {
 								gameState.getLivesRemaining(),
 								gameState.getBulletsShot(),
 								gameState.getShipsDestroyed(),
-                gameState.getCoin());
+                				gameState.getCoin());
 
 					} while (gameState.getLivesRemaining() > 0
 							&& gameState.getLevel()%NUM_LEVELS != 0);
+
+					long finish = System.currentTimeMillis();
+					setTimeElapsed(start, finish);
+					System.out.println("Play time: " + getMin() + " Min " + getSec() + " Sec ");
 
 					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 							+ " score screen at " + FPS + " fps, with a score of "
@@ -474,4 +480,19 @@ public final class Core {
 	public static int getDiff(){
 		return diff;
 	}
+
+	public static int getMin() {
+		int Min = (int)(TimeElapsed/1000)/60;
+		return Min;
+	}
+
+	public static  int getSec() {
+		int Sec = (int)(TimeElapsed/1000)%60;
+		return Sec;
+	}
+
+	public static void setTimeElapsed(long start, long finish) {
+		TimeElapsed = finish - start;
+	}
+
 }
