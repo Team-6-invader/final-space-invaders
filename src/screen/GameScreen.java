@@ -441,7 +441,7 @@ public class GameScreen extends Screen {
 
 
 					if(enemyShipFormation.isFirstLine(enemyShip)) {//맨 윗줄
-						if (EnemyShipFormation.shipCount <= gameSettings.getFormationWidth()) {//파괴 시작
+						if (EnemyShipFormation.shipCount <= gameSettings.getFormationWidth()) {//파괴 시작 조건
 
 							if (!enemyShip.isDestroyed()
 									&& checkCollision(bullet, enemyShip)) {
@@ -520,10 +520,10 @@ public class GameScreen extends Screen {
 
 	private void manageCollisionsN() {
 		Set<BulletN> recyclable = new HashSet<BulletN>();
-		for (BulletN bullet : this.bulletsN)
-			if (bullet.getSpeed() > 0) {
-				if (checkCollision(bullet, this.ship) && !this.levelFinished) {
-					recyclable.add(bullet);
+		for (BulletN bulletN : this.bulletsN)
+			if (bulletN.getSpeed() > 0) {
+				if (checkCollision(bulletN, this.ship) && !this.levelFinished) {
+					recyclable.add(bulletN);
 					if (!this.ship.isDestroyed()) {
 						this.ship.destroy();
 						this.lives--;
@@ -531,29 +531,83 @@ public class GameScreen extends Screen {
 								+ " lives remaining.");
 					}
 				}
+
 			} else {
 				for (EnemyShip enemyShip : this.enemyShipFormation)
-					if (!enemyShip.isDestroyed()
-							&& checkCollision(bullet, enemyShip)) {
-						this.score += enemyShip.getPointValue();
-						this.shipsDestroyed++;
-						Random random = new Random();
-						int per = random.nextInt(2);
-						if(per == 0){
-							items.add(ItemPool.getItem(enemyShip.getPositionX() + enemyShip.getWidth() / 2,
-									enemyShip.getPositionY(), ITEM_SPEED));
+
+
+					if(enemyShipFormation.isFirstLine(enemyShip)) {//맨 윗줄
+						if (EnemyShipFormation.shipCount <= gameSettings.getFormationWidth()) {//파괴 시작 조건
+
+							if (!enemyShip.isDestroyed()
+									&& checkCollision(bulletN, enemyShip)) {
+								enemyLives = enemyShip.getEnemyLives();
+								if (enemyLives == 1) {
+									this.score += enemyShip.getPointValue();
+									this.shipsDestroyed++;
+									Random random = new Random();
+									int per = random.nextInt(3);
+									if (per == 0) {
+										items.add(ItemPool.getItem(enemyShip.getPositionX() + enemyShip.getWidth() / 2,
+												enemyShip.getPositionY(), ITEM_SPEED));
+									}
+									this.enemyShipFormation.destroy(enemyShip);
+									this.coin += enemyShip.getPointValue() / 10;
+									Coin.balance += enemyShip.getPointValue() / 10;
+									recyclable.add(bulletN);
+								} else {
+									enemyLives--;
+									enemyShip.setenemyLives(enemyLives);
+									recyclable.add(bulletN);
+								}
+							}
 						}
-						this.enemyShipFormation.destroy(enemyShip);
-						recyclable.add(bullet);
+						else {//파괴 안될 때
+
+							if (!enemyShip.isDestroyed()
+									&& checkCollision(bulletN, enemyShip)) {
+								recyclable.add(bulletN);
+							}
+						}
 					}
+					else{//첫줄 아닌 애들 다 파괴
+						if (!enemyShip.isDestroyed()
+								&& checkCollision(bulletN, enemyShip)) {
+							enemyLives = enemyShip.getEnemyLives();
+							if (enemyLives == 1) {
+								this.score += enemyShip.getPointValue();
+								this.shipsDestroyed++;
+								Random random = new Random();
+								int per = random.nextInt(3);
+								if (per == 0) {
+									items.add(ItemPool.getItem(enemyShip.getPositionX() + enemyShip.getWidth() / 2,
+											enemyShip.getPositionY(), ITEM_SPEED));
+								}
+								this.enemyShipFormation.destroy(enemyShip);
+								this.coin += enemyShip.getPointValue() / 10;
+								Coin.balance += enemyShip.getPointValue() / 10;
+								recyclable.add(bulletN);
+							}
+							else {
+								enemyLives--;
+								enemyShip.setenemyLives(enemyLives);
+								recyclable.add(bulletN);
+							}
+						}
+					}
+
+
+
 				if (this.enemyShipSpecial != null
 						&& !this.enemyShipSpecial.isDestroyed()
-						&& checkCollision(bullet, this.enemyShipSpecial)) {
+						&& checkCollision(bulletN, this.enemyShipSpecial)) {
 					this.score += this.enemyShipSpecial.getPointValue();
 					this.shipsDestroyed++;
 					this.enemyShipSpecial.destroy();
 					this.enemyShipSpecialExplosionCooldown.reset();
-					recyclable.add(bullet);
+					this.coin += this.enemyShipSpecial.getPointValue() / 10;
+					Coin.balance += this.enemyShipSpecial.getPointValue() / 10;
+					recyclable.add(bulletN);
 				}
 			}
 		this.bullets.removeAll(recyclable);
@@ -562,10 +616,10 @@ public class GameScreen extends Screen {
 
 	private void manageCollisionsH() {
 		Set<BulletH> recyclable = new HashSet<BulletH>();
-		for (BulletH bullet : this.bulletsH)
-			if (bullet.getSpeed() > 0) {
-				if (checkCollision(bullet, this.ship) && !this.levelFinished) {
-					recyclable.add(bullet);
+		for (BulletH bulletH : this.bulletsH)
+			if (bulletH.getSpeed() > 0) {
+				if (checkCollision(bulletH, this.ship) && !this.levelFinished) {
+					recyclable.add(bulletH);
 					if (!this.ship.isDestroyed()) {
 						this.ship.destroy();
 						this.lives--;
@@ -573,29 +627,83 @@ public class GameScreen extends Screen {
 								+ " lives remaining.");
 					}
 				}
+
 			} else {
 				for (EnemyShip enemyShip : this.enemyShipFormation)
-					if (!enemyShip.isDestroyed()
-							&& checkCollision(bullet, enemyShip)) {
-						this.score += enemyShip.getPointValue();
-						this.shipsDestroyed++;
-						Random random = new Random();
-						int per = random.nextInt(2);
-						if (per == 0) {
-							items.add(ItemPool.getItem(enemyShip.getPositionX() + enemyShip.getWidth() / 2,
-									enemyShip.getPositionY(), ITEM_SPEED));
+
+
+					if(enemyShipFormation.isFirstLine(enemyShip)) {//맨 윗줄
+						if (EnemyShipFormation.shipCount <= gameSettings.getFormationWidth()) {//파괴 시작 조건
+
+							if (!enemyShip.isDestroyed()
+									&& checkCollision(bulletH, enemyShip)) {
+								enemyLives = enemyShip.getEnemyLives();
+								if (enemyLives == 1) {
+									this.score += enemyShip.getPointValue();
+									this.shipsDestroyed++;
+									Random random = new Random();
+									int per = random.nextInt(3);
+									if (per == 0) {
+										items.add(ItemPool.getItem(enemyShip.getPositionX() + enemyShip.getWidth() / 2,
+												enemyShip.getPositionY(), ITEM_SPEED));
+									}
+									this.enemyShipFormation.destroy(enemyShip);
+									this.coin += enemyShip.getPointValue() / 10;
+									Coin.balance += enemyShip.getPointValue() / 10;
+									recyclable.add(bulletH);
+								} else {
+									enemyLives--;
+									enemyShip.setenemyLives(enemyLives);
+									recyclable.add(bulletH);
+								}
+							}
 						}
-						this.enemyShipFormation.destroy(enemyShip);
-						recyclable.add(bullet);
+						else {//파괴 안될 때
+
+							if (!enemyShip.isDestroyed()
+									&& checkCollision(bulletH, enemyShip)) {
+								recyclable.add(bulletH);
+							}
+						}
 					}
+					else{//첫줄 아닌 애들 다 파괴
+						if (!enemyShip.isDestroyed()
+								&& checkCollision(bulletH, enemyShip)) {
+							enemyLives = enemyShip.getEnemyLives();
+							if (enemyLives == 1) {
+								this.score += enemyShip.getPointValue();
+								this.shipsDestroyed++;
+								Random random = new Random();
+								int per = random.nextInt(3);
+								if (per == 0) {
+									items.add(ItemPool.getItem(enemyShip.getPositionX() + enemyShip.getWidth() / 2,
+											enemyShip.getPositionY(), ITEM_SPEED));
+								}
+								this.enemyShipFormation.destroy(enemyShip);
+								this.coin += enemyShip.getPointValue() / 10;
+								Coin.balance += enemyShip.getPointValue() / 10;
+								recyclable.add(bulletH);
+							}
+							else {
+								enemyLives--;
+								enemyShip.setenemyLives(enemyLives);
+								recyclable.add(bulletH);
+							}
+						}
+					}
+
+
+
 				if (this.enemyShipSpecial != null
 						&& !this.enemyShipSpecial.isDestroyed()
-						&& checkCollision(bullet, this.enemyShipSpecial)) {
+						&& checkCollision(bulletH, this.enemyShipSpecial)) {
 					this.score += this.enemyShipSpecial.getPointValue();
 					this.shipsDestroyed++;
 					this.enemyShipSpecial.destroy();
 					this.enemyShipSpecialExplosionCooldown.reset();
-					recyclable.add(bullet);
+					this.coin += this.enemyShipSpecial.getPointValue() / 10;
+					Coin.balance += this.enemyShipSpecial.getPointValue() / 10;
+					recyclable.add(bulletH);
 				}
 			}
 		this.bullets.removeAll(recyclable);
