@@ -658,7 +658,7 @@ public class GameScreen extends Screen {
 								}
 							}
 						}
-						else {//파괴 안될 때
+						else {
 
 							if (!enemyShip.isDestroyed()
 									&& checkCollision(bulletH, enemyShip)) {
