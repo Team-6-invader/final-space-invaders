@@ -131,8 +131,6 @@ public class Entity {
 		return this.height;
 	}
 
-	Color[] bg_colors = {Color.LIGHT_GRAY, Color.GRAY, Color.DARK_GRAY};
-
 	public final void changeColor() {
 		Color Bg_color = DrawManager.bg_color;
 		setColor(Bg_color);
