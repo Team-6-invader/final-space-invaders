@@ -140,6 +140,7 @@ public class Entity {
 
 	public final void changeColor_G(int enemyLives) {
 		if (enemyLives == 2) setColor(Color.orange);
+		else if (getColor() == DrawManager.bg_color){}
 		else setColor(Color.white);
 	}
 	public final void changeColor_Last(){
