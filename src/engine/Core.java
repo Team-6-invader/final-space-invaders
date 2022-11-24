@@ -316,6 +316,10 @@ public final class Core {
 					} while (gameState.getLivesRemaining() > 0
 							&& gameState.getLevel()%NUM_LEVELS != 0);
 
+					long finish = System.currentTimeMillis();
+					setTimeElapsed(start, finish);
+					System.out.println("Play time: " + getMin() + " Min " + getSec() + " Sec ");
+
 					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 							+ " score screen at " + FPS + " fps, with a score of "
 							+ gameState.getScore() + ", "
@@ -326,10 +330,6 @@ public final class Core {
 					returnCode = frame.setScreen(currentScreen);
 					LOGGER.info("Closing score screen.");
 				}
-				long finish = System.currentTimeMillis();
-				setTimeElapsed(start, finish);
-				System.out.println("Play time: " + getMin() + " Min " + getSec() + " Sec ");
-
 				break;
 			case 3:
 				// High scores.
