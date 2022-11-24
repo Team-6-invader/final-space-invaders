@@ -389,17 +389,17 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			float ShootPattern = (float)(Math.round(Math.random()*10)/10.0);
 			if (isLast()) { // The last enemy can get the all ShootPattern.
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED  ,0));
+						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED /3 ,0));
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2,0));
+						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2/3,0));
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED,1));
+						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED/3,1));
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2,1));
+						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2/3,1));
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED,2));
+						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED/3,2));
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2,2));
+						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2/3,2));
 			}
 			else if(ShootPattern<=0.4) { //The Enemy of double Bullet Type
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()
@@ -426,17 +426,17 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		EnemyShip shooter = this.shooters.get(index);
 		if (isLast()) { // The last enemy can get the all ShootPattern.
 			bulletsN.add(BulletPool.getBulletN(shooter.getPositionX()
-					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED,0));
+					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED/3,0));
 			bulletsN.add(BulletPool.getBulletN(shooter.getPositionX()
-					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2,0));
+					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2/3,0));
 			bulletsN.add(BulletPool.getBulletN(shooter.getPositionX()
-					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED,1));
+					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED/3,1));
 			bulletsN.add(BulletPool.getBulletN(shooter.getPositionX()
-					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2,1));
+					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2/3,1));
 			bulletsN.add(BulletPool.getBulletN(shooter.getPositionX()
-					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED,2));
+					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED/3,2));
 			bulletsN.add(BulletPool.getBulletN(shooter.getPositionX()
-					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2,2));
+					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2/3,2));
 		}
 		else if (this.shootingCooldown.checkFinished()) {
 			new Sound().bulletsound();
@@ -444,17 +444,17 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			float ShootPattern = (float)(Math.round(Math.random()*10)/10.0);
 			if (isLast()) { // The last enemy can get the all ShootPattern.
 				bulletsN.add(BulletPool.getBulletN(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED,0));
+						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED/3,0));
 				bulletsN.add(BulletPool.getBulletN(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2,0));
+						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2/3,0));
 				bulletsN.add(BulletPool.getBulletN(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED,1));
+						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED/3,1));
 				bulletsN.add(BulletPool.getBulletN(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2,1));
+						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2/3,1));
 				bulletsN.add(BulletPool.getBulletN(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED,2));
+						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED/3,2));
 				bulletsN.add(BulletPool.getBulletN(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2,2));
+						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2/3,2));
 			}
 			else if(ShootPattern<=0.4) {//The Enemy of double Bullet Type
 				bulletsN.add(BulletPool.getBulletN(shooter.getPositionX()
@@ -481,17 +481,17 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		EnemyShip shooter = this.shooters.get(index);
 		if (isLast()) { // The last enemy can get the all ShootPattern.
 			bulletsH.add(BulletPool.getBulletH(shooter.getPositionX()
-					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED,0));
+					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED/3,0));
 			bulletsH.add(BulletPool.getBulletH(shooter.getPositionX()
-					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2,0));
+					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2/3,0));
 			bulletsH.add(BulletPool.getBulletH(shooter.getPositionX()
-					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED,1));
+					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED/3,1));
 			bulletsH.add(BulletPool.getBulletH(shooter.getPositionX()
-					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2,1));
+					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2/3,1));
 			bulletsH.add(BulletPool.getBulletH(shooter.getPositionX()
-					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED,2));
+					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED/3,2));
 			bulletsH.add(BulletPool.getBulletH(shooter.getPositionX()
-					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2,2));
+					+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2/3,2));
 		}
 		else if (this.shootingCooldown.checkFinished()) {
 
