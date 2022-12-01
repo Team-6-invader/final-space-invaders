@@ -634,12 +634,13 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			//맞네 012345중에 4가 죽으면 column은 01234로 바뀌지만 실질적으로 있는건 0123 5임
 			//근데 코드상으로 똑같은거 아닌가? 없어지면 없어진대로 작동되는거 아닌가
 			System.out.println("Column = " + column);
-			for (int i = 0; i < column.size(); i++)
+			for (int i = 0; i < column.size(); i++) {
 				if (i == 0) {
 					if (column.get(i).equals(destroyedShip))
 						checkFirstLine = true;
 				} else
 					checkFirstLine = false;
+			}
 		}
 		return checkFirstLine;
 	}
