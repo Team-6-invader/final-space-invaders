@@ -635,11 +635,20 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			//근데 코드상으로 똑같은거 아닌가? 없어지면 없어진대로 작동되는거 아닌가
 			System.out.println("Column = " + column);
 			for (int i = 0; i < column.size(); i++) {
+				System.out.println(i);
 				if (i == 0) {
-					if (column.get(i).equals(destroyedShip))
+					System.out.println(destroyedShip);
+					System.out.println(column.get(i));
+					System.out.println(column.get(i).equals(destroyedShip));
+					if (column.get(i).equals(destroyedShip)) {
 						checkFirstLine = true;
-				} else
-					checkFirstLine = false;
+						System.out.println("first");
+						return checkFirstLine;
+					} else {
+						checkFirstLine = false;
+						System.out.println("notFirst");
+					}
+				}
 			}
 		}
 		return checkFirstLine;
