@@ -312,20 +312,20 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 				for (EnemyShip enemyShip : column)
 					enemyShip.setColor(Color.white);
 			}
-
+			//적 개체 검흰 변화 => 배경색과 동일하게 색 변화
 			int randomPlace_r = (int) (Math.random() * enemyShips.size() - 1);
 			int randomPlace_c = (int) (Math.random() * enemyShips.get(randomPlace_r).size() - 1);
 			if(this.shipCount>nShipsWide) {
 				if (enemyShips.get(randomPlace_r).get(randomPlace_c) != null)
 					enemyShips.get(randomPlace_r).get(randomPlace_c).changeColor();
 			}
-			//목숨 여러개인 적 색상 변화
-			for (List<EnemyShip> column : this.enemyShips) {
-				for (EnemyShip enemyShip : column)
-					 enemyShip.changeColor_G(enemyShip.getEnemyLives());
-			}
 			//마지막 적 색상 변화
 			if(isLast()) changeLastEnemy();
+		}
+		//목숨 여러개인 적 색상 변화
+		for (List<EnemyShip> column : this.enemyShips) {
+			for (EnemyShip enemyShip : column)
+				enemyShip.changeColor_G(enemyShip.getEnemyLives());
 		}
 	}
 
@@ -391,7 +391,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 			float ShootPattern = (float)(Math.round(Math.random()*10)/10.0);
 			if (isLast()) { // The last enemy can get the all ShootPattern.
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()
-						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED,0));
+						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED  ,0));
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()
 						+ shooter.width / 2, shooter.getPositionY(), BULLET_SPEED * 2,0));
 				bullets.add(BulletPool.getBullet(shooter.getPositionX()

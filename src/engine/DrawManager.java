@@ -65,6 +65,8 @@ public final class DrawManager {
 	/** Big sized font properties. */
 	private static FontMetrics fontBigMetrics;
 
+	public static Color bg_color;
+
 	private static Font fontSmall;
 
 	/** Item icon and Image observer */
@@ -225,9 +227,11 @@ public final class DrawManager {
 
 		if(GameScreen.lives > 0 && GameScreen.lives <= 3){
 			backBufferGraphics.setColor(bg_colors[3 - GameScreen.lives]);
+			bg_color = bg_colors[3 - GameScreen.lives];
 		}
 		else{
 			backBufferGraphics.setColor(Color.BLACK);
+			bg_color = Color.BLACK;
 		}
 
 		backBufferGraphics
@@ -664,10 +668,11 @@ public final class DrawManager {
 	 */
 	public void drawResults(final Screen screen, final int score,
 			final int livesRemaining, final int shipsDestroyed,
-			final float accuracy, final boolean isNewRecord) {
+			final float accuracy, final boolean isNewRecord, final int Min, final int Sec) {
 		String scoreString = String.format("score %04d", score);
 		String livesRemainingString = "lives remaining " + livesRemaining;
 		String shipsDestroyedString = "enemies destroyed " + shipsDestroyed;
+		String playTimeString = "play time " + Min + " Min " + Sec +" Sec ";
 		String accuracyString = String
 				.format("accuracy %.2f%%", accuracy * 100);
 
@@ -680,6 +685,9 @@ public final class DrawManager {
 				screen.getHeight() / height + fontRegularMetrics.getHeight()
 						* 2);
 		drawCenteredRegularString(screen, shipsDestroyedString,
+				screen.getHeight() / height + fontRegularMetrics.getHeight()
+						* 32);
+		drawCenteredRegularString(screen, playTimeString,
 				screen.getHeight() / height + fontRegularMetrics.getHeight()
 						* 4);
 		drawCenteredRegularString(screen, accuracyString, screen.getHeight()

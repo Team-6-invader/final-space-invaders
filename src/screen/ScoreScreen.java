@@ -49,6 +49,9 @@ public class ScoreScreen extends Screen {
 	private float accuracy;
 	/** last stage before dead */
 	private int stage;
+	/**스크린 시간 기제를 위해 만든 변수*/
+	private int Min;
+	private int Sec;
 	/**
 	 * Constructor, establishes the properties of the screen.
 	 *
@@ -69,6 +72,8 @@ public class ScoreScreen extends Screen {
 		this.stage = gameState.getLevel();
 		this.accuracy = Math.round((float)gameState.getShipsDestroyed()/gameState.getBulletsShot()*100);
 		this.livesRemaining = gameState.getLivesRemaining();
+		this.Min = Core.getMin();//core의 시간을 받는 부분
+		this.Sec = Core.getSec();
 		this.bulletsShot = gameState.getBulletsShot();
 		this.shipsDestroyed = gameState.getShipsDestroyed();
 		this.isNewRecord = false;
@@ -178,7 +183,7 @@ public class ScoreScreen extends Screen {
 				this.isNewRecord);
 		drawManager.drawResults(this, this.score, this.livesRemaining,
 				this.shipsDestroyed, (float) this.shipsDestroyed
-						/ this.bulletsShot, this.isNewRecord);
+						/ this.bulletsShot, this.isNewRecord, this.Min, this.Sec);
 
 		if (this.isNewRecord)
 			drawManager.drawNameInput(this, this.name, this.nameCharSelected);
