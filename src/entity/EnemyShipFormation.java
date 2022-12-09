@@ -93,9 +93,7 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/** Number of not destroyed ships. */
 	public static int shipCount;
 
-	private int columnCount;
 
-	private boolean checkFirstLine = false;
 
 
 	/** Directions the formation can move. */
@@ -628,29 +626,10 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	}
 
 	public boolean isFirstLine(final EnemyShip destroyedShip){
-		System.out.println("Start new");
-		for (List<EnemyShip> column : this.enemyShips) {
-			//6줄 중 0이 먼저 죽으면 size는 5이고 i = 1 ~ 6인가?
-			//맞네 012345중에 4가 죽으면 column은 01234로 바뀌지만 실질적으로 있는건 0123 5임
-			//근데 코드상으로 똑같은거 아닌가? 없어지면 없어진대로 작동되는거 아닌가
-			System.out.println("Column = " + column);
-			for (int i = 0; i < column.size(); i++) {
-				System.out.println(i);
-				if (i == 0) {
-					System.out.println(destroyedShip);
-					System.out.println(column.get(i));
-					System.out.println(column.get(i).equals(destroyedShip));
-					if (column.get(i).equals(destroyedShip)) {
-						checkFirstLine = true;
-						System.out.println("first");
-						return checkFirstLine;
-					} else {
-						checkFirstLine = false;
-						System.out.println("notFirst");
-					}
-				}
-			}
-		}
-		return checkFirstLine;
+		for (List<EnemyShip> column : this.enemyShips)
+			for (int i = 0; i < column.size(); i++)
+				if (i == 0 && column.get(i).equals(destroyedShip)) return true;
+
+		return false;
 	}
 }
